@@ -534,7 +534,7 @@
                         </li>
                     </ul>
                 </div>
-				    <div id="my_form">
+				    <form action="board.php">
         <fieldset>
         <p>
             <label for="Name" >Name:</label>
@@ -543,10 +543,10 @@
 		<p>
 <p>
   <label for="phone">Enter a phone number:</label>
-  <input class="phone-group"type="tel" id="phone" name="phone"align="left"  placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"required >
+  <input class="phone-group"type="tel" id="phone" name="phone"align="left"  placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" >
   </p>
 <label for="email">"Email: </label>
-<input class="phone-group" id="email" name="email" placeholder="example@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"required>
+<input class="phone-group" id="email" name="email" placeholder="example@gmail.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
 <p>
   
         <p>
@@ -554,14 +554,10 @@
             <textarea id="feedback" name="feedback" cols="40" rows="5" align="left"placeholder="feedback" required=""></textarea>
         </p>
         <p>
-            <button id="nextStep">Submit</button>
+           <input type="button" value="Send Email" onclick="sendEmail()"/>
         </p>
         </fieldset>
-    </div>
-	<div id="thank_you" style="display: none;">
-  <p>Thanks for filling up the form!</p>
-  <button type="submit">Close</button>
-</div>
+    </form>
                 <div class="col-lg-2 col-md-4 col-sm-6 mt-sm-5">
                   
                 </div>
@@ -738,17 +734,40 @@
 
     <script src="js/bootstrap.js"></script>
 		 
-  <script>
-  var nextStep = document.querySelector('#nextStep');
+<?php
 
-  nextStep.addEventListener('click', function (e) {
-    e.preventDefault();
-    // Hide first view
-    document.getElementById('my_form').style.display = 'none';
+        if(array_key_exists('Send Email', $_BOARD)) {
+            button1();
+        }
 
-    // Show thank you message element
-    document.getElementById('thank_you').style.display = 'block';
-  });
+if($_POST["message"]) {
+
+
+mail("rayshayak3@gamil.com", "Thank you",
+
+
+$_POST["Please visit again"]. "From: https://rayshayak3@gmail.com");
+
+
+}
+
+
+?>
+
+<script>
+// just for the demos, avoids form submit
+$( "#myform" ).validate({
+  rules: {
+     phone: {
+      require_from_group: [1, ".phone-group"]
+    },
+    email: {
+      require_from_group: [1, ".phone-group"]
+    },
+    
+  }
+}
+});
 </script>
 </body>
 </html>
